@@ -1,0 +1,83 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-placeholder {
+  background: linear-gradient(
+    135deg,
+    var(--theme-primary-soft) 0%,
+    var(--theme-primary-soft) 48%,
+    var(--theme-primary-mid) 48%,
+    var(--theme-primary-mid) 100%
+  );
+}
+
+@layer utilities {
+  .page-wrap {
+    @apply mx-auto max-w-7xl px-5 sm:px-8;
+  }
+
+  .page-enter {
+    animation: page-enter 350ms ease-out both;
+  }
+}
+
+@layer base {
+  .text-xs,
+  .text-sm,
+  .text-base {
+    font-family: var(--font-sans);
+  }
+
+  .text-lg,
+  .text-xl,
+  .text-2xl,
+  .text-3xl,
+  .text-4xl,
+  .text-5xl,
+  .text-6xl,
+  .text-7xl,
+  .text-8xl,
+  .text-9xl {
+    font-family: var(--font-display);
+  }
+
+  html {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-stone-50 font-display text-stone-950 antialiased transition-colors dark:bg-stone-950 dark:text-stone-50;
+  }
+
+  button,
+  a,
+  select,
+  summary,
+  [role="button"] {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation-duration: 1ms;
+  }
+}

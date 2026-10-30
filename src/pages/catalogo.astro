@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const serviceImages = Object.entries(
+	import.meta.glob<string>('../assets/servicios/*.{webp,jpg}', {
+		eager: true,
+		query: '?url',
+		import: 'default',
+	}),
+)
+	.sort(([first], [second]) => first.localeCompare(second, 'es', { numeric: true }));
+---
+
+<Layout
+	title="Catálogo de servicios | Mansir Toluca"
+	description="Explora los servicios y proyectos de mantenimiento, instalaciones y remodelación de Mansir para hogares y negocios en Toluca, Nuevo León."
+	keywords="catálogo de servicios Mansir, proyectos de mantenimiento Toluca, servicios de mantenimiento residencial, mantenimiento comercial, instalaciones eléctricas, servicios de plomería, remodelación de espacios, construcción y mantenimiento, soluciones para hogares y negocios en Toluca"
+>
+		<main class="page-wrap py-8 sm:py-12 md:py-14">
+		<header class="mx-auto mb-7 max-w-2xl text-center sm:mb-9 md:mx-0 md:text-left">
+			<p class="text-sm font-semibold uppercase tracking-[0.16em] text-primary">Soluciones Mansir</p>
+			<h1 class="mt-3 font-display text-3xl font-bold text-stone-950 sm:text-4xl lg:text-5xl dark:text-stone-50">Catálogo de servicios</h1>
+			<p class="mt-4 text-base leading-7 text-stone-600 sm:text-lg dark:text-stone-300">
+				Conoce algunos de nuestros trabajos de mantenimiento, instalaciones y soluciones integrales para tus espacios.
+			</p>
+		</header>
+
+		{serviceImages.length > 0 && (
+			<section aria-label="Galería de servicios" class="mx-auto max-w-5xl overflow-hidden rounded-xl border border-stone-200 bg-white shadow-sm dark:border-stone-800 dark:bg-stone-900">
+				<div class="relative overflow-hidden bg-stone-100 dark:bg-stone-950">
+					<div data-carousel-track class="flex transition-transform duration-500 ease-out">
+						{serviceImages.map(([path, image], index) => (
+							<figure class="min-w-full">
+								<img
+									src={image}
+									alt={`Proyecto de mantenimiento y servicios integrales ${index + 1}`}
+									loading={index === 0 ? 'eager' : 'lazy'}
+									class="aspect-[4/3] max-h-[25rem] w-full object-contain sm:aspect-[16/9] sm:max-h-[28rem]"
+								/>
+								<figcaption class="sr-only">Imagen {index + 1} de {serviceImages.length}: {path.split('/').pop()}</figcaption>
+							</figure>
+						))}
+					</div>
+					<button type="button" data-carousel-previous aria-label="Imagen anterior" class="absolute left-3 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-stone-900 shadow transition hover:bg-white dark:bg-stone-900/90 dark:text-stone-50 dark:hover:bg-stone-800">
+						<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6" /></svg>
+					</button>
+					<button type="button" data-carousel-next aria-label="Imagen siguiente" class="absolute right-3 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-stone-900 shadow transition hover:bg-white dark:bg-stone-900/90 dark:text-stone-50 dark:hover:bg-stone-800">
+						<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6" /></svg>
+					</button>
+				</div>
+				<div class="flex flex-col items-center gap-1 px-4 py-3 text-center sm:flex-row sm:justify-between sm:gap-4 sm:px-6 sm:text-left">
+					<p class="text-sm text-stone-600 dark:text-stone-300"> </p>
+					<p aria-live="polite" class="text-sm font-medium tabular-nums text-stone-700 dark:text-stone-200"><span data-carousel-current>1</span> / {serviceImages.length}</p>
+				</div>
+				<div class="border-t border-stone-200 px-3 py-3 sm:py-4 dark:border-stone-800">
+					<nav aria-label="Elegir imagen del carrusel" class="mx-auto grid w-full max-w-[22rem] grid-cols-5 gap-2">
+						{serviceImages.map(([path, image], index) => (
+							<button
+								type="button"
+								data-carousel-thumbnail
+								data-index={index}
+								aria-label={`Mostrar imagen ${index + 1}: ${path.split('/').pop()}`}
+								aria-current={index === 0 ? 'true' : 'false'}
+								hidden={index >= 5}
+								class="aspect-[4/3] w-full overflow-hidden rounded-md bg-stone-100 ring-2 ring-transparent transition hover:opacity-100 aria-[current=true]:ring-primary dark:bg-stone-800"
+							>
+								<img src={image} alt="" loading="lazy" class="size-full object-cover" />
+							</button>
+						))}
+					</nav>
+				</div>
+			</section>
+		)}
+	</main>
+
+	<script>
+		const track = document.querySelector<HTMLElement>('[data-carousel-track]');
+		const currentDisplay = document.querySelector<HTMLElement>('[data-carousel-current]');
+		const thumbnails = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-carousel-thumbnail]'));
+		const slides = track?.children;
+		let currentIndex = 0;
+		const thumbnailWindowSize = 5;
+
+		function updateThumbnailWindow() {
+			const lastStart = Math.max(0, thumbnails.length - thumbnailWindowSize);
+			const windowStart = Math.min(Math.max(currentIndex - 2, 0), lastStart);
+			thumbnails.forEach((thumbnail, index) => {
+				thumbnail.hidden = index < windowStart || index >= windowStart + thumbnailWindowSize;
+				thumbnail.setAttribute('aria-current', String(index === currentIndex));
+			});
+		}
+
+		function showSlide(index: number) {
+			if (!track || !slides?.length) return;
+			currentIndex = (index + slides.length) % slides.length;
+			track.style.transform = `translateX(-${currentIndex * 100}%)`;
+			if (currentDisplay) currentDisplay.textContent = String(currentIndex + 1);
+			updateThumbnailWindow();
+		}
+
+		thumbnails.forEach((thumbnail) => {
+			thumbnail.addEventListener('click', () => showSlide(Number(thumbnail.dataset.index)));
+		});
+		document.querySelector('[data-carousel-previous]')?.addEventListener('click', () => showSlide(currentIndex - 1));
+		document.querySelector('[data-carousel-next]')?.addEventListener('click', () => showSlide(currentIndex + 1));
+	</script>
+</Layout>

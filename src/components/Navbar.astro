@@ -1,0 +1,161 @@
+---
+import lightLogo from '../assets/light-mode-logo.png';
+import darkLogo from '../assets/dark-mode-logo.png';
+---
+
+
+<header class="relative z-50 -mx-7 border-b border-stone-200 bg-white/90 dark:border-stone-800 dark:bg-stone-950/90 sm:mx-0 px-8 sm:px-10 lg:px-16">
+    <div class="page-wrap flex min-h-18 items-center justify-between py-2 sm:py-3">
+        <a href="/" aria-label="Mansir, inicio" class="flex shrink-0 items-center justify-center">
+            <img src={lightLogo.src} alt="Mansir Mantenimiento y Soluciones Integrales" width="60" height="50" class="h-[50px] w-[60px] object-contain dark:hidden" />
+            <img src={darkLogo.src} alt="Mansir Mantenimiento y Soluciones Integrales" width="60" height="50" class="hidden h-[50px] w-[60px] object-contain dark:block" />
+        </a>
+
+        <div class="hidden items-center gap-6 sm:flex">
+            <nav aria-label="Navegación principal" class="flex items-center justify-center gap-4 sm:gap-6">
+                <a class="text-sm text-stone-600 transition-colors hover:text-primary dark:text-stone-300" href="/">Inicio</a>
+                <a class="text-sm text-stone-600 transition-colors hover:text-primary dark:text-stone-300" href="/catalogo">Servicios</a>
+                <a class="text-sm text-stone-600 transition-colors hover:text-primary dark:text-stone-300" href="/contacto">Contacto</a>
+            </nav>
+
+            <button
+                type="button"
+                data-theme-toggle
+                aria-label="Activar modo oscuro"
+                title="Cambiar tema"
+                class="flex size-10 shrink-0 items-center justify-center rounded-lg border border-stone-200 text-stone-700 transition-colors hover:bg-stone-100 dark:border-stone-700 dark:text-stone-200 dark:hover:bg-stone-800"
+            >
+                <svg data-sun-icon aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5">
+                    <circle cx="12" cy="12" r="4" />
+                    <path stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+                </svg>
+                <svg data-moon-icon aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="hidden size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z" />
+                </svg>
+            </button>
+        </div>
+
+        <button
+            type="button"
+            data-menu-toggle
+            aria-label="Abrir menú"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
+            class="relative z-[70] flex size-10 shrink-0 flex-col items-center justify-center gap-1 rounded-lg border border-stone-200 text-stone-700 transition-colors hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:hidden dark:border-stone-700 dark:text-stone-200 dark:hover:bg-stone-800"
+        >
+            <span data-menu-line="top" class="h-0.5 w-5 rounded-full bg-current"></span>
+            <span data-menu-line="middle" class="h-0.5 w-5 rounded-full bg-current"></span>
+            <span data-menu-line="bottom" class="h-0.5 w-5 rounded-full bg-current"></span>
+        </button>
+    </div>
+
+    <div data-mobile-menu class="pointer-events-none fixed inset-0 z-[60] sm:hidden" aria-hidden="true">
+        <button data-menu-backdrop type="button" tabindex="-1" aria-label="Cerrar menú" class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 ease-out"></button>
+        <nav
+            id="mobile-menu"
+            aria-label="Navegación principal"
+            inert
+            class="absolute right-0 top-0 flex h-dvh w-[min(21rem,88vw)] translate-x-full flex-col gap-7 bg-white px-7 pb-8 pt-24 shadow-2xl transition-transform duration-300 ease-out dark:bg-stone-950"
+        >
+            <a data-menu-link class="border-b border-stone-200 pb-4 text-lg font-medium text-stone-800 transition-colors hover:text-primary dark:border-stone-800 dark:text-stone-100" href="/">Inicio</a>
+            <a data-menu-link class="border-b border-stone-200 pb-4 text-lg font-medium text-stone-800 transition-colors hover:text-primary dark:border-stone-800 dark:text-stone-100" href="/catalogo">Servicios</a>
+            <a data-menu-link class="border-b border-stone-200 pb-4 text-lg font-medium text-stone-800 transition-colors hover:text-primary dark:border-stone-800 dark:text-stone-100" href="/contacto">Contacto</a>
+            <button
+                type="button"
+                data-theme-toggle
+                aria-label="Activar modo oscuro"
+                title="Cambiar tema"
+                class="mt-auto flex min-h-12 items-center gap-3 border-t border-stone-200 pt-4 text-left text-sm font-medium text-stone-700 transition-colors hover:text-primary dark:border-stone-800 dark:text-stone-200"
+            >
+                <svg data-sun-icon aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="size-5">
+                    <circle cx="12" cy="12" r="4" />
+                    <path stroke-linecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+                </svg>
+                <svg data-moon-icon aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="hidden size-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z" />
+                </svg>
+                <span>Cambiar tema</span>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<script>
+    const themeToggles = document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]');
+    const menuToggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    const mobileMenu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+    const menuPanel = mobileMenu?.querySelector<HTMLElement>('#mobile-menu');
+    const menuBackdrop = mobileMenu?.querySelector<HTMLButtonElement>('[data-menu-backdrop]');
+
+    function syncThemeControl(isDark: boolean) {
+        themeToggles.forEach((themeToggle) => {
+            themeToggle.setAttribute('aria-label', isDark ? 'Activar modo claro' : 'Activar modo oscuro');
+            themeToggle.querySelectorAll<SVGElement>('[data-sun-icon]').forEach((icon) => icon.classList.toggle('hidden', isDark));
+            themeToggle.querySelectorAll<SVGElement>('[data-moon-icon]').forEach((icon) => icon.classList.toggle('hidden', !isDark));
+        });
+    }
+
+    function setMenuOpen(isOpen: boolean) {
+        menuToggle?.setAttribute('aria-expanded', String(isOpen));
+        menuToggle?.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+        mobileMenu?.classList.toggle('pointer-events-none', !isOpen);
+        mobileMenu?.classList.toggle('pointer-events-auto', isOpen);
+        mobileMenu?.setAttribute('aria-hidden', String(!isOpen));
+        menuPanel?.classList.toggle('translate-x-full', !isOpen);
+        menuPanel?.classList.toggle('translate-x-0', isOpen);
+        if (menuPanel) menuPanel.inert = !isOpen;
+        menuBackdrop?.classList.toggle('opacity-0', !isOpen);
+        menuBackdrop?.classList.toggle('opacity-100', isOpen);
+        document.body.classList.toggle('overflow-hidden', isOpen);
+    }
+
+    syncThemeControl(document.documentElement.classList.contains('dark'));
+
+    themeToggles.forEach((themeToggle) => themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        syncThemeControl(isDark);
+
+        try {
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        } catch {}
+    }));
+
+    menuToggle?.addEventListener('click', () => {
+        setMenuOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+    });
+    menuBackdrop?.addEventListener('click', () => setMenuOpen(false));
+    menuPanel?.querySelectorAll<HTMLAnchorElement>('[data-menu-link]').forEach((link) => {
+        link.addEventListener('click', () => setMenuOpen(false));
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && menuToggle?.getAttribute('aria-expanded') === 'true') {
+            setMenuOpen(false);
+            menuToggle.focus();
+        }
+    });
+</script>
+
+<style>
+    [data-menu-toggle] [data-menu-line] {
+        transform-origin: center;
+        transition: transform 250ms ease, opacity 200ms ease;
+    }
+
+    [data-menu-toggle][aria-expanded='true'] [data-menu-line='top'] {
+        transform: translateY(6px) rotate(45deg);
+    }
+
+    [data-menu-toggle][aria-expanded='true'] [data-menu-line='middle'] {
+        opacity: 0;
+    }
+
+    [data-menu-toggle][aria-expanded='true'] [data-menu-line='bottom'] {
+        transform: translateY(-6px) rotate(-45deg);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        [data-menu-toggle] [data-menu-line] {
+            transition-duration: 1ms;
+        }
+    }
+</style>

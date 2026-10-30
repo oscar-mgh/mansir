@@ -1,0 +1,18 @@
+@theme inline {
+  --font-display: "Montserrat", sans-serif;
+  --font-sans: "Inter", sans-serif;
+  --color-primary: var(--theme-primary);
+  --color-primary-soft: var(--theme-primary-soft);
+}
+
+:root {
+  --theme-primary: #9a7012;
+  --theme-primary-soft: #f6edcf;
+  --theme-primary-mid: #d5b65d;
+}
+
+html.dark {
+  --theme-primary: #e2bd59;
+  --theme-primary-soft: #3a2d12;
+  --theme-primary-mid: #ad842b;
+}
